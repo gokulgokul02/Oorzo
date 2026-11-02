@@ -44,35 +44,36 @@ return [
         ],
 
         'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => false,
-            'engine' => null,
-            // Pinned, because every datetime column in this schema is a TIMESTAMP and
-            // MySQL converts those with the session timezone. Left unset, the session
-            // inherits the server's SYSTEM zone, which MySQL caches at startup: a
-            // restart after an OS timezone change re-dates every row already written,
-            // and orders placed before it read hours away from the slot they were
-            // booked for. '+00:00' stores exactly the wall time the app hands over and
-            // hands the same one back, so a reading never depends on where the server
-            // happens to think it is. Display stays on the panel's own timezone, which
-            // ConfigServiceProvider sets from the business setting.
-            'timezone' => env('DB_TIMEZONE', '+00:00'),
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
+    'driver' => 'mysql',
 
+    // Disable DATABASE_URL override for this connection
+    'url' => null,
+
+    'host' => env(
+        'DB_HOST',
+        'cmvyogbnq00oc01qk7sv5wpm1-addon-mysql'
+    ),
+
+    'port' => env('DB_PORT', '3306'),
+    'database' => env('DB_DATABASE', 'ethiodeploy'),
+    'username' => env('DB_USERNAME', 'ethiodeploy'),
+    'password' => env('DB_PASSWORD', ''),
+
+    'unix_socket' => env('DB_SOCKET', ''),
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'strict' => false,
+    'engine' => null,
+    'timezone' => env('DB_TIMEZONE', '+00:00'),
+
+    'options' => extension_loaded('pdo_mysql')
+        ? array_filter([
+            PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+        ])
+        : [],
+],
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
