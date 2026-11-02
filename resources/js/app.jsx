@@ -2,7 +2,7 @@ import './bootstrap'
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import { route } from 'ziggy-js'
-import i18n from '../../Modules/Builder/resources/js/i18n'
+import i18n from './i18n'
 
 createInertiaApp({
   resolve: (name) => {
